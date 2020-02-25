@@ -85,7 +85,9 @@
 }
 ```
 >denom是固定字符串“ubarkis”；
+
 >amount是当前账户的余额，需要除以```10^6```，才是展示给用户看到的BKS数量；
+
 >account_number 与 sequence 参数是留给转账接口使用的，所以在每次转账之前，都需要调用这个接口获取这两个参数，然后再调用转账接口。
 
 ## 4. 转账接口
@@ -94,10 +96,15 @@
 **执行示例：**
 `curl -X POST "http://{轻节点IP}:1317/bank/accounts/barkis1csl7cm802trp2lqdky3ngpl9xka8av7y28s9ug/transfers" -H  "accept: application/json" -H  "Content-Type: application/json" -d "{  \"base_req\": {    \"from\": \"barkis1ufpp68vql0jd58anvlau97cs7ck4lxj58gn860\",    \"password\": \"barkisnet\",    \"memo\": \"first transfer to a account\",    \"chain_id\": \"barkisnet-dev\",    \"account_number\": \"55\",    \"sequence\": \"0\",    \"gas\": \"100000\",    \"gas_adjustment\": \"1.2\",    \"fees\": [      {        \"denom\": \"ubarkis\",        \"amount\": \"1000\"      }    ],    \"broadcast_mode\": \"sync\",    \"simulate\": false  },  \"amount\": [    {      \"denom\": \"ubarkis\",      \"amount\": \"22000000\"    }  ]}"`
 >address：收款方地址；
+
 >account_number：账户编号，一旦创建了账户，这个值是不变的；
+
 >sequence：每次转账都需要从/auth/accounts/{address}接口获取最新的值；
+
 >from：发送方地址；
->broadcast_mode：转账模式，可选的参数sync（阻塞），async（不阻塞）
+
+>broadcast_mode：转账模式，可选的参数sync（阻塞），async（不阻塞）；
+
 >amount：转账数量，bks公链的所有数值，通过接口上链的时候，需要在1个BKS单位的基础上乘以 ```10^6```, 从接口中拿到的数据也要除以 ```10^6``` 后展示给用户，比如你想转20个BKS，则amount的值如下
 ```math
 20 * 10^{6} = 20,000,000
@@ -123,6 +130,7 @@
 }
 ```
 > success字段表明交易成功提交到网络，不能通过这个字段来判断交易是否成功；
+
 > txhash是交易的hash值，需要通过/txs{hash}接口来查询交易的详细信息；
 
 ## 5. 根据转账返回的hash值，查询单条交易
@@ -221,10 +229,15 @@
 }
 ```
 >success：转账是否成功；
+
 >from_address：发送方地址；
+
 >to_address：接收方地址；
+
 >tx->value->msg->value-amount->amount：交易的金额，需要除以```10^6```后展示给客户；
+
 >memo：交易备注，通过这个来区分用户；
+
 >timestamp：交易发生的时间，注意这是0时区的时间，可以根据客户端的业务需求格式化为东8区；
 >
 
@@ -451,4 +464,5 @@
 
 #### 提币需要用到转账接口，转账的基本调用逻辑：
 > a. 先调用获取账号信息的接口，提取account_number与sequence参数；
+
 > b. 把上面两个参数放到转账接口中，编排好接口的body参数的json结构，然后执行；
