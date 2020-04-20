@@ -4,7 +4,7 @@
 `https://github.com/barkisnet/barkisnet-binary/raw/master/barkisnet-mainnet/binary/v2.2.1/barkiscli`
 
 ### 启动
-`nohup ./barkiscli rest-server --chain-id barkisnet-dev --trust-node --node 18.176.60.252:26657 --laddr tcp://0.0.0.0:1317 > lcd.log 2>&1 &`
+`nohup ./barkiscli rest-server --chain-id barkisnet-testnet --trust-node --node 18.176.60.252:26657 --laddr tcp://0.0.0.0:1317 > lcd.log 2>&1 &`
 
 > 1. `--chain-id barkisnet-testnet` 指定接入的网络chain-id
 > 2. `--laddr tcp://0.0.0.0:1317` 参数指定绑定当前轻节点服务器的公共IP，`0.0.0.0`代表可以被其它机器访问，假如想要只能本机程序来访问，需要改成`127.0.0.1`。
