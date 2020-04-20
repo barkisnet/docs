@@ -1,7 +1,7 @@
 # 安装轻节点
 ### 获取安装程序
 下载地址：
-`https://github.com/barkisnet/barkisnet-binary/raw/master/barkisnet-mainnet/binary/v2.2.1/barkiscli`
+`https://github.com/barkisnet/barkisnet-binary/raw/master/barkisnet-mainnet/binary/v2.2.3/barkiscli`
 
 ### 启动
 `nohup ./barkiscli rest-server --chain-id barkisnet-testnet --trust-node --node 18.176.60.252:26657 --laddr tcp://0.0.0.0:1317 > lcd.log 2>&1 &`
